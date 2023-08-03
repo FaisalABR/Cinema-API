@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const movieRouter = require("./routes/movie");
 const ticketRouter = require("./routes/ticket");
 const balanceRouter = require("./routes/balance");
+const seatRouter = require("./routes/seat");
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use(express.json());
 app.use("/api/movies", movieRouter);
 app.use("/api/tickets", ticketRouter);
 app.use("/api/balance", balanceRouter);
+app.use("/api/seats", seatRouter);
 
 // App listen
 const PORT = 8888;
