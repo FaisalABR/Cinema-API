@@ -1,11 +1,23 @@
 const router = require("express").Router();
+const redisClient = require("../utils/redisClient");
 const Movie = require("../models/Movie");
 
 // Get All Movies
 router.get("/", async (req, res) => {
   try {
-    const movies = await Movie.find();
-    res.status(200).json(movies);
+    const moviesRedis = await redisClient.get("movies");
+    if (moviesRedis) {
+      console.log("Data movies cached from redis");
+      res.status(200).json(JSON.parse(moviesRedis));
+    } else {
+      const movies = await Movie.find();
+      if (movies) {
+        console.log("Data movies cached from mongoDB");
+        // Save data to redis
+        await redisClient.setEx("movies", 3600, JSON.stringify(movies));
+        res.status(200).json(movies);
+      }
+    }
   } catch (err) {
     res.status(500).json(err);
   }
@@ -15,8 +27,14 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   const movieId = req.params.id;
   try {
-    const movie = await Movie.findById(movieId);
-    res.status(200).json(movie);
+    const movieRedis = await redisClient.get(movieId);
+    if (movieRedis) {
+      res.status(200).json(JSON.parse(movieRedis));
+    } else {
+      const movie = await Movie.findById(movieId);
+      await redisClient.setEx(movieId, 3600, JSON.stringify(movie));
+      res.status(200).json(movie);
+    }
   } catch (err) {
     res.status(500).json(err);
   }

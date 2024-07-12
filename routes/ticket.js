@@ -1,11 +1,18 @@
 const Ticket = require("../models/Ticket");
+const redisClient = require("../utils/redisClient");
 const router = require("express").Router();
 
 // Get All Tickets
 router.get("/", async (req, res) => {
   try {
-    const allTickets = await Ticket.find();
-    res.status(200).json(allTickets);
+    const ticketRedis = await redisClient.get("tickets");
+    if (ticketRedis) {
+      res.status(200).json(JSON.parse(ticketRedis));
+    } else {
+      const allTickets = await Ticket.find();
+      await redisClient.setEx("tickets", 3600, JSON.stringify(allTickets));
+      res.status(200).json(allTickets);
+    }
   } catch (err) {
     res.status(500).json(err);
   }

@@ -8,8 +8,10 @@ const balanceRouter = require("./routes/balance");
 const seatRouter = require("./routes/seat");
 
 const app = express();
-
+const redisClient = require("./utils/redisClient");
+// import { createClient } from 'redis';
 dotenv.config();
+
 // MongoDb Connect
 mongoose
   .connect(process.env.MONGO_URL, { useNewUrlParser: true })
@@ -31,5 +33,3 @@ const PORT = 8888;
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
-
-// http://www.omdbapi.com/?apikey=a8b2e133&i=tt0848228
