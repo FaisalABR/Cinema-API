@@ -14,4 +14,8 @@ CINEMA API use Node.js as a main progamming language, and the following are the 
 - **Redis**: Memory Caching for increase performance.
 
 ## Installation
+1. Clone this repository to your local:
+   ```bash
+   git clone 
+   ```
   
