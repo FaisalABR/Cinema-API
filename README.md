@@ -52,7 +52,7 @@ The following are main features that Cinema API offers:
 
 ## Endpoint API
 
-[Movies Spec API](docs/movies.md)
-[Seat Spec API](docs/seat.md)
-[Ticket Spec API](docs/ticket.md)
-[Balance Spec API](docs/balance.md)
+- [Movies Spec API](docs/movies.md)
+- [Seat Spec API](docs/seat.md)
+- [Ticket Spec API](docs/ticket.md)
+- [Balance Spec API](docs/balance.md)
