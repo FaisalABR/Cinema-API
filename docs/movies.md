@@ -1,6 +1,6 @@
 # Movies API Spec
 
-## Create Address
+## Create Movie
 
 Endpoint: POST /api/movies/
 
@@ -72,23 +72,41 @@ Response body (Failed):
 }
 ```
 
-## Update Address
+## Get Movie
 
-Endpoint: PUT /api/contacts/:idContacs/addresses/:idAddresses
+Endpoint: GET /api/movies/:movieId
 
-Request Headers:
+Response body (success):
 
-- X-API-TOKEN: token()
+```json
+{
+  "_id": "64c0a4393a5bd27b89fa6a89",
+  "title": "The Super Mario Bros. Movie",
+  "description": "Ketika sedang bekerja di bawah tanah untuk memperbaiki pipa air, Mario dan Luigi, yang merupakan tukang ledeng dari Brooklyn, tiba-tiba terhisap ke dalam pipa misterius dan masuk ke dunia yang sangat berbeda. Mereka berada di tempat yang ajaib dan aneh. Tapi sayangnya, mereka terpisah satu sama lain. Mario memulai petualangan besar untuk mencari dan menemukan Luigi.",
+  "release_date": "2023-04-05T00:00:00.000Z",
+  "poster_url": "https://image.tmdb.org/t/p/w500/qNBAXBIQlnOThrVvA6mA2B5ggV6.jpg",
+  "age_rating": 14,
+  "ticket_price": 49000
+}
+```
+
+Response body (Failed):
+
+```json
+{
+  "errors": "errors message"
+}
+```
+
+## Update Movie
+
+Endpoint: PUT /api/movies/:movieId
 
 Request body:
 
 ```json
 {
-  "street": "Jl. Damai 74",
-  "city": "Jakarta Selatan",
-  "province": "DKI Jakarta",
-  "country": "Indonesia",
-  "postalCode": "12323"
+  "ticket_price": 80000
 }
 ```
 
@@ -96,14 +114,8 @@ Response body (success):
 
 ```json
 {
-  "data": {
-    "id": 1,
-    "street": "Jl. Damai 74",
-    "city": "Jakarta Selatan",
-    "province": "DKI Jakarta",
-    "country": "Indonesia",
-    "postalCode": "12323"
-  }
+  "status": "Success",
+  "message": "Movie updated"
 }
 ```
 
@@ -115,19 +127,15 @@ Response body (Failed):
 }
 ```
 
-## Remove Address
+## Delete Movies
 
-Endpoint: DELETE /api/contacts/:idContacs/addresses/:idAddresses
-
-Request Headers:
-
-- X-API-TOKEN: token()
+Endpoint: DELETE /api/movies/:movieId
 
 Response body (success):
 
 ```json
 {
-  "data": "OK"
+  "message": "Success to delete a movie"
 }
 ```
 
@@ -135,47 +143,13 @@ Response body (Failed):
 
 ```json
 {
-  "errors": "Address is not found"
-}
-```
-
-## List Address
-
-Endpoint: GET /api/contacts/:idContacs/addresses
-
-Request Headers:
-
-- X-API-TOKEN: token()
-
-Response body (success):
-
-```json
-{
-  "data": [
-    {
-      "id": 1,
-      "street": "Jl. Damai 74",
-      "city": "Jakarta Selatan",
-      "province": "DKI Jakarta",
-      "country": "Indonesia",
-      "postalCode": "12323"
-    },
-    {
-      "id": 2,
-      "street": "Jl. Damai 74",
-      "city": "Jakarta Selatan",
-      "province": "DKI Jakarta",
-      "country": "Indonesia",
-      "postalCode": "12323"
-    }
-  ]
-}
-```
-
-Response body (Failed):
-
-```json
-{
-  "errors": "contact is not found"
+  "stringValue": "\"64bfdca7ceef352a08ac114\"",
+  "valueType": "string",
+  "kind": "ObjectId",
+  "value": "64bfdca7ceef352a08ac114",
+  "path": "_id",
+  "reason": {},
+  "name": "CastError",
+  "message": "Cast to ObjectId failed for value \"64bfdca7ceef352a08ac114\" (type string) at path \"_id\" for model \"Movie\""
 }
 ```
