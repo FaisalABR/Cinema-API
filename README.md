@@ -40,8 +40,12 @@ CINEMA API use Node.js as a main progamming language, and the following are the 
 The following are main features that Cinema API offers:
 - Movies Information
 - Ordering Cinema Ticket by Seats
-- 
-   
+- Cancel Order Cinema Ticket
+- Add Balance
+
+  ## Endpoint API
+   [Movies Spec API](docs/movies.md)
+
 
 
 
